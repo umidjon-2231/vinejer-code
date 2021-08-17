@@ -3,19 +3,19 @@
   "name": "Create by Umidjon",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "images/brands-logo(ico).ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "images/brands-logo-4.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "654x628"
     },
     {
-      "src": "logo512.png",
+      "src": "images/brands-logo-4.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "654x628"
     }
   ],
   "start_url": ".",
