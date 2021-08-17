@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Vinejer code",
+  "name": "Create by Umidjon",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,18 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#343A40",
+  "background_color": "#ffffff",
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [
+    "unlimitedStorage"
+  ],
+  "host_permissions": [
+    "http://www.blogger.com/",
+    "http://*.google.com/"
+  ]
 }

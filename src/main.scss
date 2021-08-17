@@ -1,3 +1,7 @@
+
+@import "~bootstrap/dist/css/bootstrap";
+
+
 body{
   @media (prefers-color-scheme: dark) {
     background-color: var(--dark);
@@ -17,10 +21,21 @@ body{
         color: #acacac;
       }
     }
+    .bg-secondary{
+      background-color: #6c757d!important;
+    }
+
+
   }
   @media (prefers-color-scheme: light) {
     background-color: var(--light);
     color: var(--dark);
+    .bg-secondary{
+      background-color: #a6afb7!important;
+    }
+    button.bg-secondary:hover, button.bg-secondary:focus {
+      background-color: #a6afb7 !important;
+    }
   }
 
 }
@@ -28,4 +43,6 @@ body{
 .border-success{
   border: 2px solid var(--success);
 }
+
+
 
