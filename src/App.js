@@ -24,26 +24,30 @@ function App() {
 
     const cryption=(events, values)=>{
         let key=values.key.toUpperCase(), text=values.text
-        text=text.replace(/\n/g, " ")
+        //text=text.replace(/\n/g, " ")
         key=key.replace(/" "/g, "")
         let newText="";
-        let lengthKey=key.length
         let keyId=0;
+        console.log(alphabetUpper)
+        console.log(alphabetLower)
+
 
         if(type){
             //encrypt
 
             for(let i=0; i<text.length; i++){
                 let newLatter="";
-                if(text[i]!==" " && isNaN(text[i]*1)){
+                console.log(text[i])
+                if(text[i]!==" " && isNaN(text[i]*1) && (alphabetLower.indexOf(text[i])!==-1 || alphabetUpper.indexOf(text[i])!==-1 )){
+
                     if(isUpperCase(text[i])){
-                        newLatter=alphabetUpper.search(text[i]);
-                        newLatter+=alphabetUpper.search(key[keyId])
+                        newLatter=alphabetUpper.indexOf(text[i]);
+                        newLatter+=alphabetUpper.indexOf(key[keyId])
                         newLatter%=26
                         newLatter=alphabetUpper[newLatter]
                     }else{
-                        newLatter=alphabetLower.search(text[i]);
-                        newLatter+=alphabetUpper.search(key[keyId])
+                        newLatter=alphabetLower.indexOf(text[i]);
+                        newLatter+=alphabetUpper.indexOf(key[keyId])
                         newLatter%=26
                         newLatter=alphabetLower[newLatter]
                     }
@@ -60,38 +64,26 @@ function App() {
 
         }else {
             //decrypt
-
             for(let i=0; i<text.length; i++){
                 let newLatter="";
-
-                if(text[i]!==" " && isNaN(text[i]*1)){
+                if(text[i]!==" " && isNaN(text[i]*1) && (alphabetLower.indexOf(text[i])!==-1 || alphabetUpper.indexOf(text[i])!==-1 )){
                     if(isUpperCase(text[i])){
-                        newLatter=alphabetUpper.indexOf(text[i]);
-
-                        newLatter-=alphabetUpper.indexOf(key[keyId])
-
+                        newLatter=alphabetUpper.indexOf(text[i])-alphabetUpper.indexOf(key[keyId]);
                         newLatter%=26
-
                         if(newLatter<0){
                             newLatter=alphabetUpper[26+newLatter]
                         }else{
                             newLatter=alphabetUpper[newLatter]
                         }
-
-
                     }else{
-                        newLatter=alphabetLower.search(text[i]);
-
+                        newLatter=alphabetLower.indexOf(text[i]);
                         newLatter-=alphabetUpper.indexOf(key[keyId])
-
                         newLatter%=26
-
                         if(newLatter<0){
                             newLatter=alphabetLower[26+newLatter]
                         }else{
                             newLatter=alphabetLower[newLatter]
                         }
-
                     }
                     if(keyId===key.length-1){
                         keyId=0
@@ -103,7 +95,6 @@ function App() {
                 }
                 newText+=newLatter
             }
-
         }
         setOutput(newText)
     }
@@ -143,9 +134,9 @@ function App() {
                 <div className="col-sm-6 col-12 rounded mb-5 mb-sm-0">
                     <AvForm onValidSubmit={cryption} >
                         <AvField type="textarea" name="text"
-                                 // validate={{
-                                 //    required: {value: true, errorMessage: `Type text to ${type?"encrypt":"decrypt"}`},
-                                 // }}
+                            // validate={{
+                            //    required: {value: true, errorMessage: `Type text to ${type?"encrypt":"decrypt"}`},
+                            // }}
                                  placeholder={`Text to ${type?"encryption":"decryption"}`}
                                  cols="40" rows="10"/>
 
@@ -166,7 +157,7 @@ function App() {
 
                     <button className={`btn border-primary bg-secondary  ${isDark?"btn-dark":"btn-secondary"}`}
                             onClick={()=>{
-                            copyToClipboard(document.getElementById("output").value)}}
+                                copyToClipboard(document.getElementById("output").value)}}
                             style={{position: "absolute", right: "15px",top: "-40px"}}
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -182,7 +173,7 @@ function App() {
                 </div>
             </div>
         </div>
-  );
+    );
 }
 
 export default App;
