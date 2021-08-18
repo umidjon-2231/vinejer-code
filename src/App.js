@@ -1,7 +1,8 @@
 import "./main.scss"
 import {useEffect, useState} from "react"
 import {AvForm, AvField} from "availity-reactstrap-validation"
-import {isUpperCase, useThemeDetector} from "./tools"
+import {decrypt, encrypt, isUpperCase, useThemeDetector} from "./tools"
+import {Helmet} from "react-helmet";
 
 
 
@@ -12,91 +13,25 @@ function App() {
 
 
 
-    const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-    let alphabetUpper =""
-    alpha.map((x) => alphabetUpper+=String.fromCharCode(x));
-    let alphabetLower = ""
-    alpha.map((x) => alphabetLower+=String.fromCharCode(x+32));
+
 
     useEffect(()=>{
 
     })
 
-    const cryption=(events, values)=>{
-        let key=values.key.toUpperCase(), text=values.text
-        //text=text.replace(/\n/g, " ")
-        key=key.replace(/" "/g, "")
-        let newText="";
-        let keyId=0;
-        console.log(alphabetUpper)
-        console.log(alphabetLower)
+    const crypt=(events, values)=>{
 
 
         if(type){
             //encrypt
 
-            for(let i=0; i<text.length; i++){
-                let newLatter="";
-                console.log(text[i])
-                if(text[i]!==" " && isNaN(text[i]*1) && (alphabetLower.indexOf(text[i])!==-1 || alphabetUpper.indexOf(text[i])!==-1 )){
-
-                    if(isUpperCase(text[i])){
-                        newLatter=alphabetUpper.indexOf(text[i]);
-                        newLatter+=alphabetUpper.indexOf(key[keyId])
-                        newLatter%=26
-                        newLatter=alphabetUpper[newLatter]
-                    }else{
-                        newLatter=alphabetLower.indexOf(text[i]);
-                        newLatter+=alphabetUpper.indexOf(key[keyId])
-                        newLatter%=26
-                        newLatter=alphabetLower[newLatter]
-                    }
-                    if(keyId===key.length-1){
-                        keyId=0
-                    }else{
-                        keyId++
-                    }
-                }else{
-                    newLatter=text[i]
-                }
-                newText+=newLatter
-            }
+            setOutput(encrypt(values.text, values.key))
 
         }else {
             //decrypt
-            for(let i=0; i<text.length; i++){
-                let newLatter="";
-                if(text[i]!==" " && isNaN(text[i]*1) && (alphabetLower.indexOf(text[i])!==-1 || alphabetUpper.indexOf(text[i])!==-1 )){
-                    if(isUpperCase(text[i])){
-                        newLatter=alphabetUpper.indexOf(text[i])-alphabetUpper.indexOf(key[keyId]);
-                        newLatter%=26
-                        if(newLatter<0){
-                            newLatter=alphabetUpper[26+newLatter]
-                        }else{
-                            newLatter=alphabetUpper[newLatter]
-                        }
-                    }else{
-                        newLatter=alphabetLower.indexOf(text[i]);
-                        newLatter-=alphabetUpper.indexOf(key[keyId])
-                        newLatter%=26
-                        if(newLatter<0){
-                            newLatter=alphabetLower[26+newLatter]
-                        }else{
-                            newLatter=alphabetLower[newLatter]
-                        }
-                    }
-                    if(keyId===key.length-1){
-                        keyId=0
-                    }else{
-                        keyId++
-                    }
-                }else{
-                    newLatter=text[i]
-                }
-                newText+=newLatter
-            }
+            setOutput(decrypt(values.text, values.key))
         }
-        setOutput(newText)
+
     }
 
     const changeType=()=>{
@@ -132,7 +67,7 @@ function App() {
             <div className="row">
 
                 <div className="col-sm-6 col-12 rounded mb-5 mb-sm-0">
-                    <AvForm onValidSubmit={cryption} >
+                    <AvForm onValidSubmit={crypt} >
                         <AvField type="textarea" name="text"
                             // validate={{
                             //    required: {value: true, errorMessage: `Type text to ${type?"encrypt":"decrypt"}`},

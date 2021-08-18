@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import App from './App';
+
+import Router from "./Router"
 
 ReactDOM.render(
-  <React.Fragment>
-    <App />
-  </React.Fragment>,
+    <Router/>,
   document.getElementById('root')
 );
