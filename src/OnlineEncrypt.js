@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react';
 import {useParams} from "react-router-dom"
 import {Helmet} from "react-helmet"
+import {decrypt, encrypt} from "./tools"
 
 const OnlineEncrypt = () => {
 
@@ -11,8 +12,8 @@ const OnlineEncrypt = () => {
     return (
         <div>
             <Helmet>
-                <meta name="description" content="Salom"/>
-                <title>Salom</title>
+                <meta name="description" content={encrypt(text, key)}/>
+                <title>{key}</title>
             </Helmet>
         </div>
     );

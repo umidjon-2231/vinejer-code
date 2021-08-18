@@ -1,7 +1,7 @@
 import "./main.scss"
-import {useEffect, useState} from "react"
+import { useState} from "react"
 import {AvForm, AvField} from "availity-reactstrap-validation"
-import {decrypt, encrypt, isUpperCase, useThemeDetector} from "./tools"
+import {decrypt, encrypt, useThemeDetector} from "./tools"
 import {Helmet} from "react-helmet";
 
 
@@ -11,13 +11,6 @@ function App() {
     const [type, setType]=useState(true)
     const isDark=useThemeDetector()
 
-
-
-
-
-    useEffect(()=>{
-
-    })
 
     const crypt=(events, values)=>{
 
@@ -53,6 +46,12 @@ function App() {
 
     return (
         <div className="container">
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Web site created by Umidjon"
+                />
+            </Helmet>
             <h1 className="mt-5 text-center text-sm-left">Vijener code </h1>
             <div className="col-sm col-10 mx-auto my-4 bg-info" style={{height: "2px"}}/>
             <div className="row mb-3">
